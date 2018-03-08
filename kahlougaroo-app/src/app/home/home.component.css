@@ -1,0 +1,57 @@
+.home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 54px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.pin-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.inline-block {
+  display: flex;
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.add-icon {
+  color: #f5f5f5;
+  background-color: #0eca12;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: box-shadow 1s;
+  transition: box-shadow 1s;
+}
+
+.back-icon {
+  color: #f5f5f5;
+  background-color: #ca000e;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: box-shadow 1s;
+  transition: box-shadow 1s;
+}
+
+.add-icon:hover {
+  box-shadow: 0 0 5px 2px #0eca12;
+}
+
+.back-icon:hover {
+  box-shadow: 0 0 5px 2px #ca000e;
+}
