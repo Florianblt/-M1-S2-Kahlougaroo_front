@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import {HomeComponent} from "./home/home.component";
+import {RoomComponent} from "./room/room.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
