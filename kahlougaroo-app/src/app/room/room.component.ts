@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../model/Player";
+import {ActivatedRoute} from "@angular/router";
+import {Partie} from "../model/Partie";
 
 @Component({
-  selector: 'app-room',
+  selector: 'room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
@@ -12,25 +14,23 @@ export class RoomComponent implements OnInit {
   pin: string;
   players: Player[];
 
+  joueurMaster : any;
+  partie : String[];
   // @Input
   currentUser: Player;
 
-  constructor() {  }
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.pin = params["pin"];
+    });
+    console.log(this.partie);
+    console.log(this.joueurMaster);
+  }
 
   ngOnInit() {
     this.village = 'PoopiLand';
     this.currentUser = {name:'Pierre', token:"token", admin:true};
-    this.pin = "938584"
-    this.players = [
-      {name:'Jannou', token:"token", admin: false},
-      {name:'Zlino', token:"token", admin: false},
-      {name:'Fabinou', token:"token", admin: false},
-      {name:'Fahsol', token:"token", admin: false},
-      {name:'Lolo', token:"token", admin: false},
-      {name:'Evan', token:"token", admin: false},
-      {name:'Ouioui', token:"token", admin: false},
-      {name:'Tchoupi', token:"token", admin: false},
-    ];
+    this.players = [];
   }
 
   kickPlayer(player: Player) {

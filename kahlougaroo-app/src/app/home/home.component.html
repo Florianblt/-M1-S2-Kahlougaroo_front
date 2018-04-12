@@ -2,7 +2,7 @@
   <div class="home-content">
     <h1>Kahlougaroo</h1>
     <h2>En temps réel !</h2>
-    <form class="pin-form" *ngIf="!menuOpen">
+    <div class="pin-form" *ngIf="!menuOpen">
       <div class="inline-block">
         <mat-form-field class="full-width">
           <input matInput (ngModel)="pinVillage" placeholder="PIN village">
@@ -10,8 +10,8 @@
         <mat-icon matTooltip="Créer un village" (click)="clickMenu()" class="add-icon">add</mat-icon>
       </div>
       <button mat-button (click)="joinVillage()">Rejoindre le village</button>
-    </form>
-    <form class="pin-form" *ngIf="menuOpen">
+    </div>
+    <div class="pin-form" *ngIf="menuOpen">
       <div class="inline-block">
         <mat-form-field class="full-width">
           <input matInput placeholder="Nom du village">
@@ -19,7 +19,7 @@
         <mat-icon matTooltip="Retour" (click)="clickMenu()" class="back-icon">clear</mat-icon>
       </div>
       <button mat-button (click)="createVillage()">Créer le village</button>
-    </form>
+    </div>
   </div>
 </div>
 

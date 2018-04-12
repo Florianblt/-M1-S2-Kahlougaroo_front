@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {SocketService} from "../services/socket.service";
+import {NavigationExtras, Router} from "@angular/router";
+import {CreateRoomService} from "../services/createRoom.service";
+import {Partie} from "../model/Partie";
 
 @Component({
   selector: 'app-home',
@@ -11,23 +15,44 @@ export class HomeComponent implements OnInit {
   nomVillage: string;
   pinVillage: string;
 
-  constructor() {
+  partie: Partie;
+
+
+  constructor(private router: Router,
+              private socketService: SocketService) {
     this.menuOpen = false;
+
+    this.partie = { nbJoueurs : 10, roles : ['sorcière','chasseur'], pin: 99999};
   }
 
   ngOnInit() {
+    this.socketService
+      .getMessagesCreerPartie()
+      .subscribe((data) => {
+        this.redirectToRoom(data);
+      });
+
   }
 
   clickMenu() {
-    console.log("click");
     this.menuOpen = !this.menuOpen;
   }
 
   createVillage() {
-    alert('Création de la room ...');
+    this.socketService.sendMessageCreerPartie(this.partie)
   }
 
   joinVillage(){
-    alert('Connexion à la room ' + this.pinVillage);
+    console.log('Connexion à la room ' + this.pinVillage);
+  }
+
+  redirectToRoom(data: any){
+    const partie = data.partie;
+    let navigationExtras: NavigationExtras = {
+    queryParams: {
+        "pin": data.partie.pin
+      }
+    };
+    this.router.navigate(['room'], navigationExtras);
   }
 }

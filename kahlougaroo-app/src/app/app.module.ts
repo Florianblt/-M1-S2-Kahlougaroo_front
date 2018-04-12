@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import {HomeComponent} from "./home/home.component";
 import {RoomComponent} from "./room/room.component";
+import {SocketService} from "./services/socket.service";
+import {CreateRoomService} from "./services/createRoom.service";
 
 
 @NgModule({
@@ -23,7 +25,10 @@ import {RoomComponent} from "./room/room.component";
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    SocketService,
+    CreateRoomService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
