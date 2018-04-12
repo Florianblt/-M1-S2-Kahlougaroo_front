@@ -1,5 +1,7 @@
 export class Player {
-  name: string;
+  pseudo: string;
   token: string;
-  admin: boolean;
+  master: boolean;
+  role: string;
+  vivant: boolean;
 }

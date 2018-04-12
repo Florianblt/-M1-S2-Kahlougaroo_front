@@ -10,7 +10,8 @@ import { MaterialModule } from './material.module';
 import {HomeComponent} from "./home/home.component";
 import {RoomComponent} from "./room/room.component";
 import {SocketService} from "./services/socket.service";
-import {CreateRoomService} from "./services/createRoom.service";
+import { LocalStorageModule } from '@ngx-pwa/local-storage';
+import {LocalStorageService} from "./services/local-storage.service";
 
 
 @NgModule({
@@ -23,11 +24,12 @@ import {CreateRoomService} from "./services/createRoom.service";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    LocalStorageModule
   ],
   providers: [
     SocketService,
-    CreateRoomService
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

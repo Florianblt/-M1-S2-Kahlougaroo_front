@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Player} from "../model/Player";
 import {ActivatedRoute} from "@angular/router";
 import {Partie} from "../model/Partie";
+import {SocketService} from "../services/socket.service";
+import {LocalStorageService} from "../services/local-storage.service";
 
 @Component({
   selector: 'room',
@@ -13,26 +15,37 @@ export class RoomComponent implements OnInit {
   village: string;
   pin: string;
   players: Player[];
+  token: string;
 
-  joueurMaster : any;
-  partie : String[];
+  partie: Partie;
+
   // @Input
   currentUser: Player;
 
-  constructor(private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.pin = params["pin"];
-    });
-    console.log(this.partie);
-    console.log(this.joueurMaster);
+  constructor(private route: ActivatedRoute,
+              private socketService: SocketService,
+              private localStorageService: LocalStorageService) {
+    this.token = this.localStorageService.getUser();
+    this.socketService.getPartieByToken(this.token);
   }
 
   ngOnInit() {
     this.village = 'PoopiLand';
-    this.currentUser = {name:'Pierre', token:"token", admin:true};
+    this.currentUser = {pseudo:'Pierre', token:"token", master:true, role:null, vivant:true};
     this.players = [];
+
+    // récupère les information de la partie
+    this.socketService
+      .getPartieByTokenResponse()
+      .subscribe((data) => {
+        this.partie = data;
+      });
   }
 
+  /**
+   * Exclus un joueur de la partie
+   * @param {Player} player
+   */
   kickPlayer(player: Player) {
     const index: number = this.players.indexOf(player);
     if (index !== -1) {
@@ -40,14 +53,23 @@ export class RoomComponent implements OnInit {
     }
   }
 
+  /**
+   * Lance la partie
+   */
   startStory() {
     console.log("On démarre l'histoire")
   }
 
+  /**
+   * Supprime la partie
+   */
   deleteRoom() {
     console.log("suppression de la room");
   }
 
+  /**
+   * Quitte la partie
+   */
   leaveRoom() {
     // console.log(current user + "quitte la room");
   }
