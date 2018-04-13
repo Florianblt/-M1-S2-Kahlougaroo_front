@@ -1,0 +1,21 @@
+<div class="home-content">
+  <h1>Bienvenue à {{village}}</h1>
+  <mat-card class="list-players">
+    <mat-toolbar *ngIf="partie" class="pin-area">#{{partie.pin}}</mat-toolbar>
+    <mat-toolbar class="title-list-player">VILLAGEOIS</mat-toolbar>
+    <div class="content-list-player">
+      <mat-card *ngFor="let player of players" class="player">
+        <div class="player-name">{{player.pseudo | slice:0:12}}<span *ngIf="player.pseudo.length > 12">...</span></div>
+        <div class="kicker" *ngIf="currentUser.master">
+          <mat-icon class="kick-icon" (click)="kickPlayer(player)">clear</mat-icon>
+        </div>
+      </mat-card>
+      <span *ngIf="players.length === 0">Aucun joueurs ...</span>
+    </div>
+  </mat-card>
+  <div class="btn-area">
+    <button mat-button *ngIf="currentUser.admin" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
+    <button mat-button *ngIf="currentUser.admin" class="btn close" (click)="deleteRoom()">Supprimer village</button>
+    <button mat-button *ngIf="!currentUser.admin" class="btn close" (click)="leaveRoom()">Quitter le village</button>
+  </div>
+</div>
