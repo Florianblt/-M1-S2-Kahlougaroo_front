@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {SocketService} from "../services/socket.service";
-import {NavigationExtras, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Partie} from "../model/Partie";
 import {LocalStorageService} from "../services/local-storage.service";
 import {Player} from "../model/Player";
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.menuOpen = false;
 
     // mock partie pour création
-    this.partie = { nbJoueurs : 10, roles : ['sorcière','chasseur'], pin: 99999};
+    this.partie = { nbJoueurs : 10, roles : ['sorcière','chasseur'], pin: 99999, statut: 0};
   }
 
   ngOnInit() {

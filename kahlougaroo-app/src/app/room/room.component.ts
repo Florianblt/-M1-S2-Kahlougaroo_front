@@ -38,7 +38,12 @@ export class RoomComponent implements OnInit {
     this.socketService
       .getPartieByTokenResponse()
       .subscribe((data) => {
+        console.log("partie receptionnée : " + data.pin);
         this.partie = data;
+        // this.partie.pin = data.pin;
+        // this.partie.nbJoueurs = data.nbJoueurs;
+        // this.partie.statut = data.statut;
+        console.log("partie créée : " + this.partie);
       });
   }
 
