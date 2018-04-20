@@ -68,4 +68,43 @@ export class SocketService {
       })
     })
   }
+
+  /**
+   * Confirme l'acces à la partie et recupere son instance de joueur
+   * @returns {any}
+   */
+  public getMyPlayerInstance = () => {
+    return Observable.create((observer) => {
+      this.socket.on('confirmation_join', (message) => {
+        console.log(message);
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie l'entrée d'un joueur dans le salon
+   * @returns {any}
+   */
+  public playerJoinTheRoom = () => {
+    return Observable.create((observer) => {
+      this.socket.on('joueur_join_partie', (message) => {
+        console.log(message);
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie que le salon n'existe pas
+   * @returns {any}
+   */
+  public cantJoinTheRoom = () => {
+    return Observable.create((observer) => {
+      this.socket.on('erreur_no_partie', (message) => {
+        console.log(message);
+        observer.next(message);
+      })
+    })
+  }
 }

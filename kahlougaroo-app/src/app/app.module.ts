@@ -14,6 +14,7 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import {LocalStorageService} from "./services/local-storage.service";
 import {FormsModule} from "@angular/forms";
 import {LobbyComponent} from "./lobby/lobby.component";
+import {GamesParamsDialogComponent} from "./room/games-params-dialog/games-params-dialog.component";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {LobbyComponent} from "./lobby/lobby.component";
     AppComponent,
     HomeComponent,
     RoomComponent,
-    LobbyComponent
+    LobbyComponent,
+    GamesParamsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,9 @@ import {LobbyComponent} from "./lobby/lobby.component";
   providers: [
     SocketService,
     LocalStorageService
+  ],
+  entryComponents: [
+    GamesParamsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

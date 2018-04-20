@@ -8,6 +8,10 @@
   background-color: #ffffff;
 }
 
+.content-nav {
+  background-color: red;
+}
+
 h1 {
   font-size: 20px;
 }
@@ -75,6 +79,13 @@ h1 {
 .close {
   background-color: #ff002b;
   color: white;
+}
+
+.setting-icon {
+  display: block;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }
 
 .pin-area {

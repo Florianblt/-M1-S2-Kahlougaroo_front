@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Partie} from "../model/Partie";
 import {SocketService} from "../services/socket.service";
 import {LocalStorageService} from "../services/local-storage.service";
+import {MatDialog} from "@angular/material";
+import {GamesParamsDialogComponent} from "./games-params-dialog/games-params-dialog.component";
 
 @Component({
   selector: 'room',
@@ -16,6 +18,8 @@ export class RoomComponent implements OnInit {
   pin: string;
   players: Player[];
   token: string;
+  menuOpened: boolean;
+  events = [];
 
   partie: Partie;
 
@@ -24,13 +28,16 @@ export class RoomComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private socketService: SocketService,
-              private localStorageService: LocalStorageService) {
+              private socketService2: SocketService,
+              private localStorageService: LocalStorageService,
+              public dialog: MatDialog) {
     this.token = this.localStorageService.getUser();
     this.socketService.getPartieByToken(this.token);
+    this.menuOpened = false;
   }
 
   ngOnInit() {
-    this.village = 'PadanladoK';
+    this.village = 'Thiercelieux';
     this.currentUser = {pseudo:'Pierre', token:"token", master:true, role:null, vivant:true};
     this.players = [];
 
@@ -38,9 +45,14 @@ export class RoomComponent implements OnInit {
     this.socketService
       .getPartieByTokenResponse()
       .subscribe((data) => {
-        console.log("partie receptionnée : " + data.pin);
         this.partie = data;
-        console.log("partie créée : " + this.partie);
+      });
+
+    // ecoute l'entrée de joueurs dans la room
+    this.socketService2
+      .playerJoinTheRoom()
+      .subscribe((data) => {
+        this.players.push({pseudo: data, token: null, master:false, role:null, vivant:true})
       });
   }
 
@@ -74,6 +86,17 @@ export class RoomComponent implements OnInit {
    */
   leaveRoom() {
     // console.log(current user + "quitte la room");
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(GamesParamsDialogComponent, {
+      width: '80%', //height: '70vh',
+      data: 'This text is passed into the dialog!'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      // this.dialogResult = result;
+    });
   }
 
 }

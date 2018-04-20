@@ -60,3 +60,9 @@ h2 {
 .back-icon:hover {
   box-shadow: 0 0 5px 2px #ca000e;
 }
+
+::ng-deep .testSnack {
+  background-color: #ca000e;
+  color: whitesmoke;
+  text-align: right;
+}
