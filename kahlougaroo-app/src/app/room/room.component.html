@@ -14,8 +14,8 @@
     </div>
   </mat-card>
   <div class="btn-area">
-    <button mat-button *ngIf="currentUser.admin" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
-    <button mat-button *ngIf="currentUser.admin" class="btn close" (click)="deleteRoom()">Supprimer village</button>
-    <button mat-button *ngIf="!currentUser.admin" class="btn close" (click)="leaveRoom()">Quitter le village</button>
+    <button mat-button *ngIf="currentUser.master" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
+    <button mat-button *ngIf="currentUser.master" class="btn close" (click)="deleteRoom()">Supprimer village</button>
+    <button mat-button *ngIf="!currentUser.master" class="btn close" (click)="leaveRoom()">Quitter le village</button>
   </div>
 </div>

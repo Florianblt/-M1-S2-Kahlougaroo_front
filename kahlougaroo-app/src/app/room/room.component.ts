@@ -30,7 +30,7 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.village = 'PoopiLand';
+    this.village = 'PadanladoK';
     this.currentUser = {pseudo:'Pierre', token:"token", master:true, role:null, vivant:true};
     this.players = [];
 
@@ -40,9 +40,6 @@ export class RoomComponent implements OnInit {
       .subscribe((data) => {
         console.log("partie receptionnée : " + data.pin);
         this.partie = data;
-        // this.partie.pin = data.pin;
-        // this.partie.nbJoueurs = data.nbJoueurs;
-        // this.partie.statut = data.statut;
         console.log("partie créée : " + this.partie);
       });
   }

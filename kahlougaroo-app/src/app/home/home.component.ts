@@ -15,9 +15,6 @@ export class HomeComponent implements OnInit {
   // bool de gestion menu
   menuOpen: boolean;
 
-  // nom de la partie
-  nomVillage: string;
-
   // pin du village à rejoindre
   pinVillage: string;
 
@@ -36,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.menuOpen = false;
 
     // mock partie pour création
-    this.partie = { nbJoueurs : 10, roles : ['sorcière','chasseur'], pin: 99999, statut: 0};
+    this.partie = { nbJoueurs : 6, pin: null, statut: null};
   }
 
   ngOnInit() {
@@ -63,6 +60,7 @@ export class HomeComponent implements OnInit {
    */
   createVillage() {
     this.socketService.sendMessageCreerPartie(this.partie)
+    // console.log(this.partie);
   }
 
   /**

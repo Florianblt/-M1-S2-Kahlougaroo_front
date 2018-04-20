@@ -12,6 +12,7 @@ import {RoomComponent} from "./room/room.component";
 import {SocketService} from "./services/socket.service";
 import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import {LocalStorageService} from "./services/local-storage.service";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {LocalStorageService} from "./services/local-storage.service";
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    LocalStorageModule
+    LocalStorageModule,
+    FormsModule,
   ],
   providers: [
     SocketService,
