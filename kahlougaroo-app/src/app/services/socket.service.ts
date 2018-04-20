@@ -34,7 +34,14 @@ export class SocketService {
     this.socket.emit('get_partie_by_token', token);
   }
 
-
+  /**
+   * Demande à rejoindre une partie avec le pin contenu dans data
+   * Le joueur aura pour pseudo celui contenu dans data
+   * @param data
+   */
+  public joinPartie(data: any){
+    this.socket.emit('join', data);
+  }
 
   //GETERS
 

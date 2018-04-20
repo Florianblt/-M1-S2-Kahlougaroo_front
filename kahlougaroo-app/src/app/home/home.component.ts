@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   // pin du village à rejoindre
   pinVillage: string;
 
+  //pseudo choisi par le joueur
+  pseudo: string;
+
   // partie qui sera créée
   partie: Partie;
 
@@ -60,14 +63,14 @@ export class HomeComponent implements OnInit {
    */
   createVillage() {
     this.socketService.sendMessageCreerPartie(this.partie)
-    // console.log(this.partie);
   }
 
   /**
    * Rejoindre une partie existante
    */
   joinVillage(){
-    console.log('Connexion à la room ' + this.pinVillage);
+    const data = {pin: this.pinVillage, pseudo: this.pseudo};
+    this.socketService.joinPartie(data);
   }
 
   /**
