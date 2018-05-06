@@ -6,6 +6,6 @@ import { LobbyComponent } from './lobby.component';
   imports: [
     CommonModule
   ],
-  declarations: [LobbyComponent]
+  declarations: []
 })
 export class LobbyModule { }

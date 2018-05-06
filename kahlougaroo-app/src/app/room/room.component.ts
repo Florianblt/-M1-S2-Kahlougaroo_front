@@ -64,6 +64,7 @@ export class RoomComponent implements OnInit {
     const index: number = this.players.indexOf(player);
     if (index !== -1) {
       this.players.splice(index, 1);
+      this.socketService.kickPlayer(this.partie.pin, player)
     }
   }
 

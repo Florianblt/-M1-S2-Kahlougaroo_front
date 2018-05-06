@@ -3,6 +3,7 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 import {Router} from "@angular/router";
 import {Partie} from "../model/Partie";
+import {Player} from "../model/Player";
 
 @Injectable()
 export class SocketService {
@@ -43,6 +44,17 @@ export class SocketService {
     this.socket.emit('join', data);
   }
 
+  /**
+   * Quitte la partie
+   */
+  public leaveGame(){
+    this.socket.emit('quitter_room');
+  }
+
+  public kickPlayer(pin: number, player: Player){
+    this.socket.emit('exclure_room', { pin: pin, pseudo: player.pseudo });
+  }
+
   //GETERS
 
   /**
@@ -76,7 +88,6 @@ export class SocketService {
   public getMyPlayerInstance = () => {
     return Observable.create((observer) => {
       this.socket.on('confirmation_join', (message) => {
-        console.log(message);
         observer.next(message);
       })
     })
@@ -89,7 +100,6 @@ export class SocketService {
   public playerJoinTheRoom = () => {
     return Observable.create((observer) => {
       this.socket.on('joueur_join_partie', (message) => {
-        console.log(message);
         observer.next(message);
       })
     })
@@ -102,9 +112,20 @@ export class SocketService {
   public cantJoinTheRoom = () => {
     return Observable.create((observer) => {
       this.socket.on('erreur_no_partie', (message) => {
-        console.log(message);
         observer.next(message);
       })
+    })
+  }
+
+  /**
+   * Notifie que le joueur est expulsé de la partie
+   * @returns {any}
+   */
+  public beKicked = () => {
+    return Observable.create((observer) => {
+      this.socket.on('you_kick', (message) => {
+        observer.next(message);
+      });
     })
   }
 }
