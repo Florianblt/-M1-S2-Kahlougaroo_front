@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import {Router} from "@angular/router";
 import {Partie} from "../model/Partie";
 import {Player} from "../model/Player";
+import {Roles} from "../model/Roles";
 
 @Injectable()
 export class SocketService {
@@ -51,8 +52,21 @@ export class SocketService {
     this.socket.emit('quitter_room');
   }
 
+  /**
+   * Exclu un joueur de la partie
+   * @param {number} pin
+   * @param {Player} player
+   */
   public kickPlayer(pin: number, player: Player){
     this.socket.emit('exclure_room', { pin: pin, pseudo: player.pseudo });
+  }
+
+  public startPartie(pin: number, nbJoueurs: number, roles: Roles){
+    this.socket.emit('start_game', {
+      pin:pin,
+      nbJoueurs:nbJoueurs,
+      roles:roles
+    });
   }
 
   //GETERS

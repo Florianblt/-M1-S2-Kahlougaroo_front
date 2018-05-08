@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Player} from "../model/Player";
+import {Roles} from "../model/Roles";
 import {ActivatedRoute} from "@angular/router";
 import {Partie} from "../model/Partie";
 import {SocketService} from "../services/socket.service";
@@ -73,6 +74,9 @@ export class RoomComponent implements OnInit {
    */
   startStory() {
     console.log("On démarre l'histoire")
+    let roles = new Roles(3,true,true,true,true,true);
+    let nbJoueurs = 12;
+    this.socketService.startPartie(this.partie.pin, nbJoueurs, roles);
   }
 
   /**
