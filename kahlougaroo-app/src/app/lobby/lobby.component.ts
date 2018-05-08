@@ -22,6 +22,12 @@ export class LobbyComponent implements OnInit {
         alert('Vous avez été exclu de la partie');
         this.beKicked();
       });
+
+    this.socketService
+      .getRole()
+      .subscribe((data) => {
+        console.log('Role : ' + data);
+      });
   }
 
   leave() {

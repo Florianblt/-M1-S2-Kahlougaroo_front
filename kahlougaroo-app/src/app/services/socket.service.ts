@@ -142,4 +142,16 @@ export class SocketService {
       })
     })
   }
+
+  /**
+   * Notifie que le joueur a reçu son rôle
+   * @returns {any}
+   */
+  public getRole = () => {
+    return Observable.create((observer) => {
+      this.socket.on('role', (message) => {
+        observer.next(message);
+      });
+    });
+  }
 }

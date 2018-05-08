@@ -74,8 +74,8 @@ export class RoomComponent implements OnInit {
    */
   startStory() {
     console.log("On démarre l'histoire")
-    let roles = new Roles(3,true,true,true,true,true);
-    let nbJoueurs = 12;
+    let roles = new Roles(1,true,true,false,false,false);
+    let nbJoueurs = 6;
     this.socketService.startPartie(this.partie.pin, nbJoueurs, roles);
   }
 
