@@ -17,8 +17,9 @@ export class LobbyComponent implements OnInit {
   ngOnInit() {
     // declenché lorsque l'ont est exclu de la partie
     this.socketService
-      .getPartieByTokenResponse()
+      .beKicked()
       .subscribe((data) => {
+        alert('Vous avez été exclu de la partie');
         this.beKicked();
       });
   }
@@ -30,7 +31,8 @@ export class LobbyComponent implements OnInit {
   }
 
   beKicked() {
-    alert("Vous etes viré");
+    this.localStorageService.cleanLocalStoage();
+    this.router.navigate(['']);
   }
 
 }

@@ -125,7 +125,7 @@ export class SocketService {
     return Observable.create((observer) => {
       this.socket.on('you_kick', (message) => {
         observer.next(message);
-      });
+      })
     })
   }
 }
