@@ -1,5 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialogRef} from "@angular/material";
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {Roles} from "../../model/Roles";
 
 @Component({
   selector: 'app-games-params-dialog',
@@ -9,7 +10,11 @@ import {MatDialogRef} from "@angular/material";
 })
 export class GamesParamsDialogComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<GamesParamsDialogComponent>) {
+  public roles: Roles;
+
+  constructor(private dialogRef: MatDialogRef<GamesParamsDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.roles = data;
   }
 
   ngOnInit() {

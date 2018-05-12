@@ -21,6 +21,7 @@ export class RoomComponent implements OnInit {
   token: string;
   menuOpened: boolean;
   events = [];
+  roles: Roles;
 
   partie: Partie;
 
@@ -35,6 +36,7 @@ export class RoomComponent implements OnInit {
     this.token = this.localStorageService.getUser();
     this.socketService.getPartieByToken(this.token);
     this.menuOpened = false;
+    this.roles = {nbLoups: 2, chasseur: true, cupidon: true, petiteFille: true, sorciere: true, voyante: true};
   }
 
   ngOnInit() {
@@ -74,7 +76,7 @@ export class RoomComponent implements OnInit {
    */
   startStory() {
     console.log("On démarre l'histoire")
-    let roles = new Roles(1,true,true,false,false,false);
+    let roles = this.roles;
     let nbJoueurs = 6;
     this.socketService.startPartie(this.partie.pin, nbJoueurs, roles);
   }
@@ -96,11 +98,12 @@ export class RoomComponent implements OnInit {
   openDialog() {
     let dialogRef = this.dialog.open(GamesParamsDialogComponent, {
       width: '80%', //height: '70vh',
-      data: 'This text is passed into the dialog!'
+      data: this.roles
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      // this.dialogResult = result;
+      console.log('close with : ... ');
+      console.log(this.roles);
     });
   }
 
