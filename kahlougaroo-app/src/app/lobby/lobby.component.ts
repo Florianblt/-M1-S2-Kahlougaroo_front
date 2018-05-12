@@ -19,10 +19,10 @@ export class LobbyComponent implements OnInit {
     this.socketService
       .beKicked()
       .subscribe((data) => {
-        alert('Vous avez été exclu de la partie');
         this.beKicked();
       });
 
+    //déclenché lors de l'attribution des roles
     this.socketService
       .getRole()
       .subscribe((data) => {
@@ -30,13 +30,22 @@ export class LobbyComponent implements OnInit {
       });
   }
 
+  /**
+   * Quitter la partie
+   * se desinscrit aupres de socket et clean le local storage
+   */
   leave() {
     this.socketService.leaveGame();
     this.localStorageService.cleanLocalStoage();
     this.router.navigate(['']);
   }
 
+  /**
+   * Exclusion de la partie
+   * Informe de l'exclusion et clean le local storage
+   */
   beKicked() {
+    alert('Vous avez été exclu de la partie');
     this.localStorageService.cleanLocalStoage();
     this.router.navigate(['']);
   }

@@ -16,11 +16,9 @@ import {GamesParamsDialogComponent} from "./games-params-dialog/games-params-dia
 export class RoomComponent implements OnInit {
 
   village: string;
-  pin: string;
   players: Player[];
   token: string;
   menuOpened: boolean;
-  events = [];
   roles: Roles;
 
   partie: Partie;
@@ -75,10 +73,18 @@ export class RoomComponent implements OnInit {
    * Lance la partie
    */
   startStory() {
-    console.log("On démarre l'histoire")
-    let roles = this.roles;
-    let nbJoueurs = 6;
-    this.socketService.startPartie(this.partie.pin, nbJoueurs, roles);
+    if(this.checkRoles()){
+      console.log("On démarre l'histoire")
+      let roles = this.roles;
+      let nbJoueurs = this.players.length;
+      this.socketService.startPartie(this.partie.pin, nbJoueurs, roles);
+    } else {
+      if(this.players.length <= 2) {
+        alert("Trop peu de joueurs ! (3 minimum)");
+      } else {
+        this.openDialog();
+      }
+    }
   }
 
   /**
@@ -89,22 +95,56 @@ export class RoomComponent implements OnInit {
   }
 
   /**
-   * Quitte la partie
+   * Annonce la départ d'un joueur
    */
-  leaveRoom() {
+  leaveRoom(pseudo: string) {
     // console.log(current user + "quitte la room");
   }
 
+  /**
+   * Ouverture de la modale settings
+   */
   openDialog() {
     let dialogRef = this.dialog.open(GamesParamsDialogComponent, {
       width: '80%', //height: '70vh',
       data: this.roles
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      console.log('close with : ... ');
-      console.log(this.roles);
     });
+  }
+
+  /**
+   * Vérifie avant de lancer la partie que les roles paramétrés
+   * sont compatibles avec le de joueurs
+   */
+  private checkRoles() {
+    let nbRoles = this.roles.nbLoups;
+    const nbJoueurs = this.players.length
+    if(this.roles.cupidon) {
+      nbRoles += 1;
+    }
+    if(this.roles.petiteFille) {
+      nbRoles += 1;
+    }
+    if(this.roles.chasseur) {
+      nbRoles += 1;
+    }
+    if(this.roles.sorciere) {
+      nbRoles += 1;
+    }
+    if(this.roles.voyante) {
+      nbRoles += 1;
+    }
+    if(nbJoueurs <= 2){
+      return false;
+    } else if(nbRoles > nbJoueurs) {
+      alert('Lancement impossible ! Plus de rôles que de joueurs !');
+      return false;
+    } else if(this.roles.nbLoups / nbJoueurs > 0.4) {
+      alert('Lancement impossible ! Trop de loups pour le nombre de joueurs');
+    } else {
+      return true;
+    }
   }
 
 }

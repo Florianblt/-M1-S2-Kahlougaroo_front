@@ -14,13 +14,11 @@
       <button mat-button (click)="joinVillage()">Rejoindre le village</button>
     </div>
     <div class="pin-form" *ngIf="menuOpen">
-      <div class="inline-block">
-        <mat-form-field class="full-width">
-          <input type="number" [(ngModel)]="partie.nbJoueurs" matInput placeholder="Nombre de joueurs" value="5">
-        </mat-form-field>
-        <mat-icon matTooltip="Retour" (click)="clickMenu()" class="back-icon">clear</mat-icon>
+        <div class="create-msg">Vous Souhaitez créer une nouvelle partie ?</div>
+      <div class="create-btn">
+        <button mat-button class="confirm-btn"(click)="createVillage()">Oui !</button>
+        <button mat-button class="cancel-btn" (click)="clickMenu()">Non ...</button>
       </div>
-      <button mat-button (click)="createVillage()">Créer le village</button>
     </div>
   </div>
 </div>
