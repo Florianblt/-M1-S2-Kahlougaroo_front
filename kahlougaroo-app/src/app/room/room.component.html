@@ -2,7 +2,7 @@
   <h1>Bienvenue à {{village}}</h1>
   <mat-card class="list-players">
     <mat-toolbar *ngIf="partie" class="pin-area">#{{partie.pin}} <mat-icon (click)="openDialog()" matTooltip="Paramètres" class="setting-icon">settings</mat-icon></mat-toolbar>
-    <mat-toolbar class="title-list-player">VILLAGEOIS</mat-toolbar>
+    <mat-toolbar class="title-list-player">{{players.length}} VILLAGEOIS</mat-toolbar>
     <div class="content-list-player">
       <mat-card *ngFor="let player of players" class="player">
         <div class="player-name">{{player.pseudo | slice:0:12}}<span *ngIf="player.pseudo.length > 12">...</span></div>

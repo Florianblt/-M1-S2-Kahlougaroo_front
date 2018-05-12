@@ -52,19 +52,21 @@ export class HomeComponent implements OnInit {
         this.redirectToRoom();
       });
 
+    // déclenché lors de la connexion à une partie
+    // enregistre le token personnel du joueur dans le local storage
+    // redirige vers le lobby d'attente
     this.socketService
       .getMyPlayerInstance()
       .subscribe((data) => {
-        console.log("reception join " + data);
         this.currentPlayer = data;
         this.localStorageService.saveUser(this.currentPlayer.token);
         this.redirectToLobby();
       });
 
+    // annonce que la game est introuvable
     this.socketService
       .cantJoinTheRoom()
       .subscribe((data) => {
-        console.log("pas de game " + data);
         this.openSnackBar();
       });
   }
