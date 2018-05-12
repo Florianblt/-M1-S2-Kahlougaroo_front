@@ -13,13 +13,17 @@ import {SocketService} from "./services/socket.service";
 import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import {LocalStorageService} from "./services/local-storage.service";
 import {FormsModule} from "@angular/forms";
+import {LobbyComponent} from "./lobby/lobby.component";
+import {GamesParamsDialogComponent} from "./room/games-params-dialog/games-params-dialog.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RoomComponent
+    RoomComponent,
+    LobbyComponent,
+    GamesParamsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,9 @@ import {FormsModule} from "@angular/forms";
   providers: [
     SocketService,
     LocalStorageService
+  ],
+  entryComponents: [
+    GamesParamsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

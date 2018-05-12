@@ -1,7 +1,7 @@
 <div class="home-content">
   <h1>Bienvenue à {{village}}</h1>
   <mat-card class="list-players">
-    <mat-toolbar *ngIf="partie" class="pin-area">#{{partie.pin}}</mat-toolbar>
+    <mat-toolbar *ngIf="partie" class="pin-area">#{{partie.pin}} <mat-icon (click)="openDialog()" matTooltip="Paramètres" class="setting-icon">settings</mat-icon></mat-toolbar>
     <mat-toolbar class="title-list-player">VILLAGEOIS</mat-toolbar>
     <div class="content-list-player">
       <mat-card *ngFor="let player of players" class="player">
@@ -19,3 +19,4 @@
     <button mat-button *ngIf="!currentUser.master" class="btn close" (click)="leaveRoom()">Quitter le village</button>
   </div>
 </div>
+

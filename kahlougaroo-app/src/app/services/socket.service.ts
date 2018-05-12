@@ -3,6 +3,8 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 import {Router} from "@angular/router";
 import {Partie} from "../model/Partie";
+import {Player} from "../model/Player";
+import {Roles} from "../model/Roles";
 
 @Injectable()
 export class SocketService {
@@ -43,6 +45,30 @@ export class SocketService {
     this.socket.emit('join', data);
   }
 
+  /**
+   * Quitte la partie
+   */
+  public leaveGame(){
+    this.socket.emit('quitter_room');
+  }
+
+  /**
+   * Exclu un joueur de la partie
+   * @param {number} pin
+   * @param {Player} player
+   */
+  public kickPlayer(pin: number, player: Player){
+    this.socket.emit('exclure_room', { pin: pin, pseudo: player.pseudo });
+  }
+
+  public startPartie(pin: number, nbJoueurs: number, roles: Roles){
+    this.socket.emit('start_game', {
+      pin:pin,
+      nbJoueurs:nbJoueurs,
+      roles:roles
+    });
+  }
+
   //GETERS
 
   /**
@@ -67,5 +93,65 @@ export class SocketService {
         observer.next(message);
       })
     })
+  }
+
+  /**
+   * Confirme l'acces à la partie et recupere son instance de joueur
+   * @returns {any}
+   */
+  public getMyPlayerInstance = () => {
+    return Observable.create((observer) => {
+      this.socket.on('confirmation_join', (message) => {
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie l'entrée d'un joueur dans le salon
+   * @returns {any}
+   */
+  public playerJoinTheRoom = () => {
+    return Observable.create((observer) => {
+      this.socket.on('joueur_join_partie', (message) => {
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie que le salon n'existe pas
+   * @returns {any}
+   */
+  public cantJoinTheRoom = () => {
+    return Observable.create((observer) => {
+      this.socket.on('erreur_no_partie', (message) => {
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie que le joueur est expulsé de la partie
+   * @returns {any}
+   */
+  public beKicked = () => {
+    return Observable.create((observer) => {
+      this.socket.on('you_kick', (message) => {
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie que le joueur a reçu son rôle
+   * @returns {any}
+   */
+  public getRole = () => {
+    return Observable.create((observer) => {
+      this.socket.on('role', (message) => {
+        observer.next(message);
+      });
+    });
   }
 }

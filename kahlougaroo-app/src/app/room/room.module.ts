@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GamesParamsDialogComponent } from './games-params-dialog/games-params-dialog.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  declarations: []
+  declarations: [
+  ],
+  entryComponents: [
+  ]
 })
 export class RoomModule { }
