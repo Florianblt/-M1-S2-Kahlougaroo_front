@@ -6,12 +6,12 @@ export class Roles {
   sorciere: boolean;
   petiteFille: boolean;
 
-  constructor(nbLoups: number, cupidon: boolean, chasseur: boolean, voyante: boolean, sorciere: boolean, petiteFille: boolean) {
-    this.nbLoups = nbLoups;
-    this.cupidon = cupidon;
-    this.chasseur = chasseur;
-    this.voyante = voyante;
-    this.sorciere = sorciere;
-    this.petiteFille = petiteFille;
-  }
+  // constructor(nbLoups: number, cupidon: boolean, chasseur: boolean, voyante: boolean, sorciere: boolean, petiteFille: boolean) {
+  //   this.nbLoups = nbLoups;
+  //   this.cupidon = cupidon;
+  //   this.chasseur = chasseur;
+  //   this.voyante = voyante;
+  //   this.sorciere = sorciere;
+  //   this.petiteFille = petiteFille;
+  // }
 }
