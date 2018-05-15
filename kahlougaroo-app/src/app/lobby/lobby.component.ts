@@ -26,7 +26,9 @@ export class LobbyComponent implements OnInit {
     this.socketService
       .getRole()
       .subscribe((data) => {
-        console.log('Role : ' + data);
+        this.localStorageService.saveRole(data);
+        console.log(data);
+        // this.redirectToGame();
       });
   }
 
@@ -48,6 +50,10 @@ export class LobbyComponent implements OnInit {
     alert('Vous avez été exclu de la partie');
     this.localStorageService.cleanLocalStoage();
     this.router.navigate(['']);
+  }
+
+  redirectToGame(){
+    this.router.navigate(['game']);
   }
 
 }
