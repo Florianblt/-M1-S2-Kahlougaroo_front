@@ -2,7 +2,8 @@
   <h1>Bienvenue à {{village}}</h1>
   <mat-card class="list-players">
     <mat-toolbar *ngIf="partie" class="pin-area">#{{partie.pin}} <mat-icon (click)="openDialog()" matTooltip="Paramètres" class="setting-icon">settings</mat-icon></mat-toolbar>
-    <mat-toolbar class="title-list-player">{{players.length}} VILLAGEOIS</mat-toolbar>
+    <mat-toolbar *ngIf="this.players.length < 3" class="title-list-player">{{players.length}} VILLAGEOIS / 3 MINIMUM</mat-toolbar>
+    <mat-toolbar *ngIf="this.players.length >= 3" class="title-list-player">{{players.length}} VILLAGEOIS</mat-toolbar>
     <div class="content-list-player">
       <mat-card *ngFor="let player of players" class="player">
         <div class="player-name">{{player.pseudo | slice:0:12}}<span *ngIf="player.pseudo.length > 12">...</span></div>
@@ -14,7 +15,8 @@
     </div>
   </mat-card>
   <div class="btn-area">
-    <button mat-button *ngIf="currentUser.master" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
+    <button mat-button disabled *ngIf="currentUser.master && this.players.length < 3" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
+    <button mat-button *ngIf="currentUser.master && this.players.length >= 3" class="btn start" (click)="startStory()">Démarrer l'histoire</button>
     <button mat-button *ngIf="currentUser.master" class="btn close" (click)="deleteRoom()">Supprimer village</button>
     <button mat-button *ngIf="!currentUser.master" class="btn close" (click)="leaveRoom()">Quitter le village</button>
   </div>

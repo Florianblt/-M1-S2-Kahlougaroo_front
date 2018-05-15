@@ -144,7 +144,7 @@ export class SocketService {
   }
 
   /**
-   * Notifie que le joueur a reçu son rôle
+   * Récupère le role du joueur au lancement de la partie
    * @returns {any}
    */
   public getRole = () => {

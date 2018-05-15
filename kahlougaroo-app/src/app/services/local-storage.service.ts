@@ -24,7 +24,7 @@ export class LocalStorageService {
   }
 
   /**
-   * Renvoie l'utilisateur stocké en local
+   * Retourne l'utilisateur stocké en local
    * @returns {any}
    */
   public getUser(): any {
@@ -36,5 +36,28 @@ export class LocalStorageService {
    */
   public removeUser(){
     window.localStorage.removeItem('token');
+  }
+
+  /**
+   * Sauvegarde le role du joueur dans le local storage
+   * @param {string} role
+   */
+  public saveRole( role: string){
+    window.localStorage.setItem('role', role);
+  }
+
+  /**
+   * Retourne le role stocké du stockage local
+   * @returns {any}
+   */
+  public getRole(): any {
+    return window.localStorage.getItem('role');
+  }
+
+  /**
+   * Supprime le role du stockage local
+   */
+  public removeRole(){
+    window.localStorage.removeItem('role');
   }
 }

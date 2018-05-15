@@ -15,6 +15,7 @@ import {LocalStorageService} from "./services/local-storage.service";
 import {FormsModule} from "@angular/forms";
 import {LobbyComponent} from "./lobby/lobby.component";
 import {GamesParamsDialogComponent} from "./room/games-params-dialog/games-params-dialog.component";
+import {GameComponent} from "./game/game.component";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {GamesParamsDialogComponent} from "./room/games-params-dialog/games-param
     HomeComponent,
     RoomComponent,
     LobbyComponent,
+    GameComponent,
     GamesParamsDialogComponent
   ],
   imports: [
