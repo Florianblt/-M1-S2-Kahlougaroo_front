@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit {
       .getMessagesCreerPartie()
       .subscribe((data) => {
         this.currentPlayer = data;
-        this.localStorageService.saveUser(this.currentPlayer.token);
+        this.localStorageService.savePseudo(this.currentPlayer.pseudo);
+        this.localStorageService.saveToken(this.currentPlayer.token);
         this.redirectToRoom();
       });
 
@@ -59,7 +60,8 @@ export class HomeComponent implements OnInit {
       .getMyPlayerInstance()
       .subscribe((data) => {
         this.currentPlayer = data;
-        this.localStorageService.saveUser(this.currentPlayer.token);
+        this.localStorageService.savePseudo(this.currentPlayer.pseudo);
+        this.localStorageService.saveToken(this.currentPlayer.token);
         this.redirectToLobby();
       });
 

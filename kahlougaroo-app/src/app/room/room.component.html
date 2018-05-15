@@ -6,7 +6,10 @@
     <mat-toolbar *ngIf="this.players.length >= 3" class="title-list-player">{{players.length}} VILLAGEOIS</mat-toolbar>
     <div class="content-list-player">
       <mat-card *ngFor="let player of players" class="player">
-        <div class="player-name">{{player.pseudo | slice:0:12}}<span *ngIf="player.pseudo.length > 12">...</span></div>
+        <div class="player-name">{{player | slice:0:12}}<span *ngIf="player.length > 12">...</span></div>
+        <div class="pinger" *ngIf="currentUser.master">
+          <mat-icon class="vibration-icon" (click)="pingPlayer(player)">vibration</mat-icon>
+        </div>
         <div class="kicker" *ngIf="currentUser.master">
           <mat-icon class="kick-icon" (click)="kickPlayer(player)">clear</mat-icon>
         </div>

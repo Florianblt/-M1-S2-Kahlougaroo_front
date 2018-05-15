@@ -37,7 +37,7 @@ export class LobbyComponent implements OnInit {
    * se desinscrit aupres de socket et clean le local storage
    */
   leave() {
-    this.socketService.leaveGame();
+    this.socketService.leaveGame(this.localStorageService.getToken(), this.localStorageService.getPseudo());
     this.localStorageService.cleanLocalStoage();
     this.router.navigate(['']);
   }

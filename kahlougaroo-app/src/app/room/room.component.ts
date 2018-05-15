@@ -16,7 +16,7 @@ import {GamesParamsDialogComponent} from "./games-params-dialog/games-params-dia
 export class RoomComponent implements OnInit {
 
   village: string;
-  players: Player[];
+  players: string[];
   token: string;
   menuOpened: boolean;
   roles: Roles;
@@ -31,7 +31,7 @@ export class RoomComponent implements OnInit {
               private socketService2: SocketService,
               private localStorageService: LocalStorageService,
               public dialog: MatDialog) {
-    this.token = this.localStorageService.getUser();
+    this.token = this.localStorageService.getToken();
     this.socketService.getPartieByToken(this.token);
     this.menuOpened = false;
     this.roles = {nbLoups: 2, chasseur: true, cupidon: true, petiteFille: true, sorciere: true, voyante: true};
@@ -50,10 +50,19 @@ export class RoomComponent implements OnInit {
       });
 
     // ecoute l'entrée de joueurs dans la room
-    this.socketService2
+    this.socketService
       .playerJoinTheRoom()
       .subscribe((data) => {
-        this.players.push({pseudo: data, token: null, master:false, role:null, vivant:true})
+        this.players.push(data);
+      });
+
+    this.socketService
+      .joueurQuittePartie()
+      .subscribe((data) => {
+        const index: number = this.players.indexOf(data);
+        if (index !== -1) {
+          this.players.splice(index, 1);
+        }
       });
   }
 
@@ -61,12 +70,20 @@ export class RoomComponent implements OnInit {
    * Exclus un joueur de la partie
    * @param {Player} player
    */
-  kickPlayer(player: Player) {
+  kickPlayer(player: string) {
     const index: number = this.players.indexOf(player);
     if (index !== -1) {
       this.players.splice(index, 1);
-      this.socketService.kickPlayer(this.partie.pin, player)
+      this.socketService.kickPlayer(this.partie.pin, player);
     }
+  }
+
+  /**
+   * Envoi un ping à un joueur
+   * @param {Player} player
+   */
+  pingPlayer(player: Player) {
+
   }
 
   /**

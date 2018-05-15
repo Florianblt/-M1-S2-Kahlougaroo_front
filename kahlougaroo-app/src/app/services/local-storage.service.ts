@@ -19,7 +19,7 @@ export class LocalStorageService {
    * Sauvegarde le token utilisateur dans le stockage local
    * @param {string} token
    */
-  public saveUser(token: string) {
+  public saveToken(token: string) {
     window.localStorage.setItem('token', token);
   }
 
@@ -27,14 +27,14 @@ export class LocalStorageService {
    * Retourne l'utilisateur stocké en local
    * @returns {any}
    */
-  public getUser(): any {
+  public getToken(): any {
     return window.localStorage.getItem('token');
   }
 
   /**
    * Supprime le token utilisateur du stockage local
    */
-  public removeUser(){
+  public removeToken(){
     window.localStorage.removeItem('token');
   }
 
@@ -59,5 +59,21 @@ export class LocalStorageService {
    */
   public removeRole(){
     window.localStorage.removeItem('role');
+  }
+
+  /**
+   * Sauvegarde le pseudo de l'utilisateur dans le stockage local
+   * @param {string} pseudo
+   */
+  public savePseudo(pseudo: string){
+    window.localStorage.setItem('pseudo', pseudo);
+  }
+
+  /**
+   * Renvoie le pseudo de l'utilisateur stocké en local
+   * @returns {any}
+   */
+  public getPseudo(): any {
+    return window.localStorage.getItem('pseudo');
   }
 }

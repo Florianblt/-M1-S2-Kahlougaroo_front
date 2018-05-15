@@ -48,8 +48,8 @@ export class SocketService {
   /**
    * Quitte la partie
    */
-  public leaveGame(){
-    this.socket.emit('quitter_room');
+  public leaveGame(token: string, pseudo: string){
+    this.socket.emit('quitter_room', {token: token, pseudo: pseudo});
   }
 
   /**
@@ -57,8 +57,8 @@ export class SocketService {
    * @param {number} pin
    * @param {Player} player
    */
-  public kickPlayer(pin: number, player: Player){
-    this.socket.emit('exclure_room', { pin: pin, pseudo: player.pseudo });
+  public kickPlayer(pin: number, player: string){
+    this.socket.emit('exclure_room', { pin: pin, pseudo: player });
   }
 
   public startPartie(pin: number, nbJoueurs: number, roles: Roles){
@@ -150,6 +150,18 @@ export class SocketService {
   public getRole = () => {
     return Observable.create((observer) => {
       this.socket.on('role', (message) => {
+        observer.next(message);
+      });
+    });
+  }
+
+  /**
+   * Notifie toute une room qu'un joueur est parti
+   * @returns {any}
+   */
+  public joueurQuittePartie = () => {
+    return Observable.create((observer) => {
+      this.socket.on('joueur_quitte_partie', (message) => {
         observer.next(message);
       });
     });

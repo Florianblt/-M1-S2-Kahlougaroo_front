@@ -47,13 +47,23 @@ h1 {
 .player-name {
   width: 50%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.pinger {
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .kicker {
-  width: 50%;
+  width: 25%;
   display: flex;
   justify-content: flex-end;
+}
+
+.vibration-icon{
+  cursor: pointer;
 }
 
 .kick-icon {
