@@ -82,8 +82,8 @@ export class RoomComponent implements OnInit {
    * Envoi un ping à un joueur
    * @param {Player} player
    */
-  pingPlayer(player: Player) {
-
+  pingPlayer(player: string) {
+    this.socketService.pingPlayer(this.partie.pin, player);
   }
 
   /**

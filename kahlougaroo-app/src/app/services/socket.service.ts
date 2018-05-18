@@ -61,6 +61,16 @@ export class SocketService {
     this.socket.emit('exclure_room', { pin: pin, pseudo: player });
   }
 
+  public pingPlayer(pin: number, player: string){
+    this.socket.emit('ping_player', {pin: pin, pseudo: player });
+  }
+
+  /**
+   * Lance la partie
+   * @param {number} pin
+   * @param {number} nbJoueurs
+   * @param {Roles} roles
+   */
   public startPartie(pin: number, nbJoueurs: number, roles: Roles){
     this.socket.emit('start_game', {
       pin:pin,
@@ -138,6 +148,18 @@ export class SocketService {
   public beKicked = () => {
     return Observable.create((observer) => {
       this.socket.on('you_kick', (message) => {
+        observer.next(message);
+      })
+    })
+  }
+
+  /**
+   * Notifie le joueur qu'il reçoit un ping de la partie
+   * @returns {any}
+   */
+  public pinged = () => {
+    return Observable.create((observer) => {
+      this.socket.on('ping', (message) => {
         observer.next(message);
       })
     })
