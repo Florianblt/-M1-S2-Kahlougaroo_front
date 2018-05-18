@@ -1,0 +1,8 @@
+
+\.idea/
+
+*.iml
+
+kahlougaroo-app/yarn-error\.log
+
+kahlougaroo-app/yarn\.lock

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  Parametres de la partie
+</mat-toolbar>
+<div class="settings-menu">
+    <div class="loups-garous">
+      Nombre de Loups Garous
+      <mat-slider min="1" max="4" step="1" thumbLabel="true" [(ngModel)]="roles.nbLoups"></mat-slider>
+    </div>
+    <div class="other-roles">
+      <div class="role"><mat-checkbox [(ngModel)]="roles.cupidon"></mat-checkbox> Cupidon</div>
+      <div class="role"><mat-checkbox [(ngModel)]="roles.chasseur"></mat-checkbox> Chasseur</div>
+      <div class="role"><mat-checkbox  [(ngModel)]="roles.voyante"></mat-checkbox> Voyante</div>
+      <div class="role"><mat-checkbox [(ngModel)]="roles.sorciere"></mat-checkbox> Sorcière</div>
+      <div class="role"><mat-checkbox [(ngModel)]="roles.petiteFille"></mat-checkbox> Petite fille</div>
+    </div>
+</div>
+<button mat-button (click)="close()" class="btn-validate">Ok !</button>
+
+
