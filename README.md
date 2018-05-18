@@ -1,6 +1,12 @@
 #Kahlougaroo
 
-Outil de management de LoupGarou.
+
+**Installer le serveur**
+
+* Avec npm : ``npm install`` + ``npm start ``
+* Avec yarn : ``yarn install`` + ``yarn start ``
+
+**Outil de management de LoupGarou.**
 
 2 options, créer ou rejoindre une room :
 
